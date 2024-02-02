@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  facebook_api:
+    image: python:3.11-slim-buster
+    container_name: facebook_api
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/facebook_api
+    ports:
+      - 8134:8134
