@@ -11,7 +11,7 @@ def get_user_id_conversion_id(
     version: str, page_id: str, access_token: str, message=False
 ) -> dict:
     """
-    用來取得用戶 id 與 對話 id
+    get user id and conversation id
     """
     messages_info = "messages{id,message}"
     url = f"https://graph.facebook.com/{version}/{page_id}/conversations?fields=participants,{messages_info}&access_token={access_token}"
@@ -35,7 +35,7 @@ def message_data(user_id: str, message: str) -> dict:
 
 def send_message(user_id: str, message: str, access_token) -> dict:
     """
-    成功的 output 如下:
+    successfull output would be like this:
     {
     "recipient_id": "24522651050715780",
     "message_id": "m_vkWuL501BoHy0IFig1imW2kI-ix8Dj7nvFNlk8rZGBxTl-Pt1vDysfvWbNvR0fJ3tjBaUy1HA4zpqjUbcrpuVg"
@@ -64,26 +64,3 @@ def get_all_messages_info(version: str, conversion_id: str, access_token: str) -
         return {"error": "Response could not be serialized"}
     except Exception as e:
         return {"error": e}
-
-
-if __name__ == "__main__":
-    result = get_user_id_conversion_id(
-        version="v18.0",
-        page_id="100448962975781",
-        access_token=os.getenv("ACCESS_TOKEN"),
-    )
-
-    if "error" not in result.keys():
-        # result = get_all_messages_info(
-        #     version="v18.0",
-        #     conversion_id=result["conversion_id"],
-        #     access_token=os.getenv("ACCESS_TOKEN"),
-        # )
-
-        # result = send_message(
-        #     user_id=result["user_id"],
-        #     message="寫詩嗎?",
-        #     access_token=os.getenv("ACCESS_TOKEN"),
-        # )
-
-        print(result)
